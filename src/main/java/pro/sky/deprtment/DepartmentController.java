@@ -1,13 +1,12 @@
-package pro.sky.coursework;
+package pro.sky.deprtment;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pro.sky.coursework.Employee;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/departments")
@@ -30,18 +29,11 @@ public class DepartmentController {
     }
 
     @GetMapping("/all")
-    public List<Employee> getAllEmployeesByDepartment(@RequestParam(required = false) Integer departmentId) {
+    public Object getAllEmployees(@RequestParam(required = false) Integer departmentId) {
         if (departmentId != null) {
             return departmentService.getAllEmployeesByDepartment(departmentId);
         } else {
-            return departmentService.getAllEmployeesGroupedByDepartment().values().stream()
-                    .flatMap(List::stream)
-                    .collect(Collectors.toList());
+            return departmentService.getAllEmployeesGroupedByDepartment();
         }
-    }
-
-    @GetMapping("/all-grouped")
-    public Map<Integer, List<Employee>> getAllEmployeesGroupedByDepartment() {
-        return departmentService.getAllEmployeesGroupedByDepartment();
     }
 }
