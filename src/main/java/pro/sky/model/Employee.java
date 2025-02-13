@@ -1,4 +1,4 @@
-package pro.sky.coursework;
+package pro.sky.model;
 
 
 import java.util.Objects;

@@ -1,9 +1,8 @@
-package pro.sky.deprtment;
+package pro.sky.service;
 
 import org.springframework.stereotype.Service;
-import pro.sky.coursework.Employee;
+import pro.sky.model.Employee;
 import pro.sky.coursework.EmployeeNotFoundException;
-import pro.sky.coursework.EmployeeService;
 
 import java.util.Comparator;
 import java.util.List;

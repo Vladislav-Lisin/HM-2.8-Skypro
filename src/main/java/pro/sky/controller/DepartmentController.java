@@ -1,11 +1,11 @@
-package pro.sky.deprtment;
+package pro.sky.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.coursework.Employee;
-
+import pro.sky.model.Employee;
+import pro.sky.service.DepartmentService;
 
 
 @RestController
