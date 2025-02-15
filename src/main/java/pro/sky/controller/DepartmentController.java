@@ -1,15 +1,12 @@
 package pro.sky.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.model.Employee;
 import pro.sky.service.DepartmentService;
 
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/department")
 public class DepartmentController {
 
     private final DepartmentService departmentService;
@@ -18,22 +15,27 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("/max-salary")
-    public Employee getEmployeeWithMaxSalary(@RequestParam int departmentId) {
-        return departmentService.getEmployeeWithMaxSalary(departmentId);
+    @GetMapping("/employees")
+    public Object getAllEmployees() {
+        return departmentService.getAllEmployeesByAllDepartments();
     }
 
-    @GetMapping("/min-salary")
-    public Employee getEmployeeWithMinSalary(@RequestParam int departmentId) {
-        return departmentService.getEmployeeWithMinSalary(departmentId);
+    @GetMapping("/{id}/salary/max")
+    public Employee getEmployeeWithMaxSalary(@PathVariable int id) {
+        return departmentService.getEmployeeWithMaxSalary(id);
     }
 
-    @GetMapping("/all")
-    public Object getAllEmployees(@RequestParam(required = false) Integer departmentId) {
-        if (departmentId != null) {
-            return departmentService.getAllEmployeesByDepartment(departmentId);
-        } else {
-            return departmentService.getAllEmployeesGroupedByDepartment();
-        }
+    @GetMapping("/{id}/salary/min")
+    public Employee getEmployeeWithMinSalary(@PathVariable int id) {
+        return departmentService.getEmployeeWithMinSalary(id);
     }
+
+    @GetMapping("/{id}/employees")
+    public Object getAllEmployeesByDepartment(@PathVariable Integer id) {
+        return departmentService.getAllEmployeesByDepartment(id);
+    }
+
+
+
+
 }
