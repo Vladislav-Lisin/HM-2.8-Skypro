@@ -1,7 +1,11 @@
-package pro.sky.coursework;
+package pro.sky.service;
 
 
 import org.springframework.stereotype.Service;
+import pro.sky.coursework.EmployeeAlreadyAddedException;
+import pro.sky.coursework.EmployeeNotFoundException;
+import pro.sky.coursework.EmployeeStorageIsFullException;
+import pro.sky.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +16,8 @@ public class EmployeeService {
     List<Employee> employeesList = new ArrayList<>();
 
 
-    public Employee addEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee addEmployee(String firstName, String lastName, int salary, int department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeesList.size() >= maxCountEmployees) {
             throw new EmployeeStorageIsFullException("Достигнут лимит количества сотрудников в фирме.");
         }
@@ -25,7 +29,7 @@ public class EmployeeService {
     }
 
     public Employee removeEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName, 0, 0); // Salary and department are not used for comparison
         if (!employeesList.contains(employee)) {
             throw new EmployeeNotFoundException("Сотрудник с таким именем не найден.");
         }
@@ -33,12 +37,16 @@ public class EmployeeService {
         return employee;
     }
 
-    public Employee findeEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee findEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName, 0, 0); // Salary and department are not used for comparison
         if (!employeesList.contains(employee)) {
             throw new EmployeeNotFoundException("Сотрудник не найден.");
         }
         return employee;
+    }
+
+    public List<Employee> getAllEmployees() {
+        return new ArrayList<>(employeesList);
     }
 
 }
