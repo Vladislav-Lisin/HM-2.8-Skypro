@@ -35,6 +35,11 @@ public class DepartmentController {
         return departmentService.getAllEmployeesByDepartment(id);
     }
 
+    @GetMapping("/{id}/salary/sum")
+    public int getDepartmentSumSalary(@PathVariable int id){
+        return departmentService.getDepartmentSumSalary(id);
+    }
+
 
 
 

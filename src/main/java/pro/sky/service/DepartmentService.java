@@ -43,4 +43,10 @@ public class DepartmentService {
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 
+    public int getDepartmentSumSalary(int id) {
+        return employeeService.getAllEmployees().stream()
+                .filter(employee -> employee.getDepartment() == id)
+                .mapToInt(Employee::getSalary)
+                .sum();
+    }
 }

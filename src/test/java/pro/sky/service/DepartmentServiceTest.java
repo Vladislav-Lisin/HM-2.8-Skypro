@@ -55,7 +55,6 @@ class DepartmentServiceTest {
     @Test
     void testGetEmployeeWithMaxSalaryWhenDepartmentNotFound() {
         when(employeeService.getAllEmployees()).thenReturn(employees);
-
         assertThrows(EmployeeNotFoundException.class, () -> {
             departmentService.getEmployeeWithMaxSalary(4);
         });
@@ -119,4 +118,16 @@ class DepartmentServiceTest {
         assertEquals(2, result.get(2).size());
         assertEquals(1, result.get(3).size());
     }
+
+    @Test
+    void testGetDepartmentSumSalary() {
+        when(employeeService.getAllEmployees()).thenReturn(employees);
+
+        assertEquals(11000,  departmentService.getDepartmentSumSalary(1));
+        assertEquals(11500, departmentService.getDepartmentSumSalary(2));
+        assertEquals(5500, departmentService.getDepartmentSumSalary(3));
+        assertEquals(0, departmentService.getDepartmentSumSalary(4));
+    }
+
+
 }
